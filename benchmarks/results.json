@@ -1,0 +1,398 @@
+{
+  "machine": {
+    "load_average_at_start": [
+      91.11,
+      59.51,
+      60.84
+    ],
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpus": 8,
+    "python": "3.12.16",
+    "datapassport": "0.1.0",
+    "duckdb": "2.0.1",
+    "polars": "2.2.0",
+    "pandas": "3.1.1",
+    "memory_gb": 16,
+    "cpu": "Apple M1 Pro"
+  },
+  "results": [
+    {
+      "task": "sha256 of file bytes",
+      "group": "identity",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 0.12499012499756645,
+      "seconds_all": [
+        0.18530583300162107,
+        0.12499012499756645,
+        0.11465850000240607
+      ],
+      "peak_rss_mb": 24,
+      "result": "6579d36655071f2c24f1ed62f0951ac2c7cc7f14c2d1a61969b9a34aea8d6284",
+      "load_average_after": 139.86
+    },
+    {
+      "task": "polars hash_rows().sum()",
+      "group": "identity",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 0.497472833005304,
+      "seconds_all": [
+        0.9970539589994587,
+        0.497472833005304,
+        0.29053254099562764
+      ],
+      "peak_rss_mb": 235,
+      "result": "1770886621087573401",
+      "load_average_after": 125.81
+    },
+    {
+      "task": "datapassport fingerprint",
+      "group": "identity",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 8.629852165999182,
+      "seconds_all": [
+        13.687086666999676,
+        8.629852165999182,
+        8.544585042000108
+      ],
+      "peak_rss_mb": 187,
+      "result": "755660bf5462dacc6fef58404660129b9fb6a8caf21500d093ea6b6d2af9d08e",
+      "load_average_after": 85.59
+    },
+    {
+      "task": "duckdb SUMMARIZE",
+      "group": "profile",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 4.500159709001309,
+      "seconds_all": [
+        8.591920459002722,
+        4.500159709001309,
+        1.7212464999975055
+      ],
+      "peak_rss_mb": 151,
+      "result": "('id', 'BIGINT', '0', '999999', 982272, '499999.5', '288675.27893234405', '254642', '500182', '750000', 1000000, Decimal",
+      "load_average_after": 93.33
+    },
+    {
+      "task": "polars describe()",
+      "group": "profile",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 0.22184983299666783,
+      "seconds_all": [
+        0.22184983299666783,
+        0.16307812499871943,
+        0.34495774999959394
+      ],
+      "peak_rss_mb": 251,
+      "result": "(9, 11)",
+      "load_average_after": 88.1
+    },
+    {
+      "task": "pandas describe(include='all')",
+      "group": "profile",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 1.4322233329949086,
+      "seconds_all": [
+        3.0430768330043065,
+        1.4322233329949086,
+        0.9821703749985318
+      ],
+      "peak_rss_mb": 419,
+      "result": "(11, 10)",
+      "load_average_after": 84.56
+    },
+    {
+      "task": "datapassport inspect",
+      "group": "profile",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 5.358336500001315,
+      "seconds_all": [
+        8.049619208999502,
+        5.358336500001315,
+        4.024932790998719
+      ],
+      "peak_rss_mb": 710,
+      "result": "755660bf5462",
+      "load_average_after": 67.61
+    },
+    {
+      "task": "datapassport inspect, sample=100k",
+      "group": "profile",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 1.935248750000028,
+      "seconds_all": [
+        1.5439986670025974,
+        1.935248750000028,
+        4.259045083003002
+      ],
+      "peak_rss_mb": 446,
+      "result": "100047",
+      "load_average_after": 62.9
+    },
+    {
+      "task": "polars keyed diff (join)",
+      "group": "diff",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 0.4175067499963916,
+      "seconds_all": [
+        0.4913250000026892,
+        0.3716734580011689,
+        0.4175067499963916
+      ],
+      "peak_rss_mb": 754,
+      "result": "(5000, 5180, 9708)",
+      "load_average_after": 58.34
+    },
+    {
+      "task": "datapassport compare --key id",
+      "group": "diff",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 10.587609166999755,
+      "seconds_all": [
+        10.194703208995634,
+        10.587609166999755,
+        16.574994000002334
+      ],
+      "peak_rss_mb": 819,
+      "result": "(5000, 5180, 9708)",
+      "load_average_after": 42.32
+    },
+    {
+      "task": "polars read_csv + describe()",
+      "group": "csv",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 0.2305804999996326,
+      "seconds_all": [
+        0.3344821659993613,
+        0.1796196669965866,
+        0.2305804999996326
+      ],
+      "peak_rss_mb": 268,
+      "result": "(9, 11)",
+      "load_average_after": 40.93
+    },
+    {
+      "task": "datapassport inspect (CSV)",
+      "group": "csv",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 3.718541207999806,
+      "seconds_all": [
+        4.894635416996607,
+        2.8905345000021043,
+        3.718541207999806
+      ],
+      "peak_rss_mb": 841,
+      "result": "19e8d23dc9c4",
+      "load_average_after": 40.86
+    },
+    {
+      "task": "datapassport inspect (CSV), memory_limit=1GB",
+      "group": "csv",
+      "size": "1m",
+      "repeats": 3,
+      "seconds_median": 4.095722999998543,
+      "seconds_all": [
+        3.0489224160046433,
+        4.095722999998543,
+        5.134768541996891
+      ],
+      "peak_rss_mb": 811,
+      "result": "19e8d23dc9c4",
+      "load_average_after": 37.27
+    },
+    {
+      "task": "sha256 of file bytes",
+      "group": "identity",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 0.17654733349991147,
+      "seconds_all": [
+        0.21015516699844738,
+        0.14293950000137556
+      ],
+      "peak_rss_mb": 24,
+      "result": "becbf530334f882d849cf27904d9856c1b2656a8171da8dcd3ae6db296fe92c8",
+      "load_average_after": 37.27
+    },
+    {
+      "task": "polars hash_rows().sum()",
+      "group": "identity",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 0.8347157289972529,
+      "seconds_all": [
+        0.950143374997424,
+        0.7192880829970818
+      ],
+      "peak_rss_mb": 1324,
+      "result": "13663725989464618495",
+      "load_average_after": 37.27
+    },
+    {
+      "task": "datapassport fingerprint",
+      "group": "identity",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 13.028545666504215,
+      "seconds_all": [
+        13.840148250004859,
+        12.21694308300357
+      ],
+      "peak_rss_mb": 324,
+      "result": "50e51a87fdd80820ce7c572d3643c51a5133909486e8e066637e8bff05db58cc",
+      "load_average_after": 34.21
+    },
+    {
+      "task": "duckdb SUMMARIZE",
+      "group": "profile",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 6.872729833001358,
+      "seconds_all": [
+        7.857140416002949,
+        5.888319249999768
+      ],
+      "peak_rss_mb": 324,
+      "result": "('id', 'BIGINT', '0', '9999999', 9895083, '4999999.5', '2886751.4902857123', '2508253', '5019994', '7484528', 10000000, ",
+      "load_average_after": 41.28
+    },
+    {
+      "task": "polars describe()",
+      "group": "profile",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 1.4548576874985883,
+      "seconds_all": [
+        0.7596594579954399,
+        2.150055917001737
+      ],
+      "peak_rss_mb": 1360,
+      "result": "(9, 11)",
+      "load_average_after": 41.28
+    },
+    {
+      "task": "pandas describe(include='all')",
+      "group": "profile",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 15.757207249997009,
+      "seconds_all": [
+        17.095878624997567,
+        14.41853587499645
+      ],
+      "peak_rss_mb": 1706,
+      "result": "(11, 10)",
+      "load_average_after": 47.33
+    },
+    {
+      "task": "datapassport inspect",
+      "group": "profile",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 23.615976041503018,
+      "seconds_all": [
+        24.82214408300206,
+        22.409808000003977
+      ],
+      "peak_rss_mb": 867,
+      "result": "50e51a87fdd8",
+      "load_average_after": 54.46
+    },
+    {
+      "task": "datapassport inspect, sample=100k",
+      "group": "profile",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 9.567652812496817,
+      "seconds_all": [
+        11.51384291699651,
+        7.621462707997125
+      ],
+      "peak_rss_mb": 696,
+      "result": "100322",
+      "load_average_after": 52.75
+    },
+    {
+      "task": "polars keyed diff (join)",
+      "group": "diff",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 4.805507520999527,
+      "seconds_all": [
+        4.683116916996369,
+        4.9278981250026845
+      ],
+      "peak_rss_mb": 2924,
+      "result": "(50000, 49894, 97451)",
+      "load_average_after": 50.21
+    },
+    {
+      "task": "datapassport compare --key id",
+      "group": "diff",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 71.86857314599547,
+      "seconds_all": [
+        29.275737749994732,
+        114.4614085419962
+      ],
+      "peak_rss_mb": 2445,
+      "result": "(50000, 49894, 97451)",
+      "load_average_after": 168.42
+    },
+    {
+      "task": "polars read_csv + describe()",
+      "group": "csv",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 14.967463666500407,
+      "seconds_all": [
+        19.822178833004727,
+        10.112748499996087
+      ],
+      "peak_rss_mb": 875,
+      "result": "(9, 11)",
+      "load_average_after": 232.46
+    },
+    {
+      "task": "datapassport inspect (CSV)",
+      "group": "csv",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 77.8467758955012,
+      "seconds_all": [
+        64.16524883300008,
+        91.52830295800231
+      ],
+      "peak_rss_mb": 674,
+      "result": "3ce43ef42d35",
+      "load_average_after": 249.99
+    },
+    {
+      "task": "datapassport inspect (CSV), memory_limit=1GB",
+      "group": "csv",
+      "size": "10m",
+      "repeats": 2,
+      "seconds_median": 58.168388333499024,
+      "seconds_all": [
+        72.46751466699789,
+        43.86926200000016
+      ],
+      "peak_rss_mb": 865,
+      "result": "3ce43ef42d35",
+      "load_average_after": 231.0
+    }
+  ]
+}

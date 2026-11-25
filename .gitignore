@@ -1,0 +1,16 @@
+.venv/
+.venv-package/
+.tmp/
+__pycache__/
+*.pyc
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+benchmarks/data/
+.claude/
+examples/output/
+examples/data/*.parquet

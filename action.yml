@@ -1,0 +1,69 @@
+name: DataPassport check
+description: Validate a dataset against a contract (and an optional baseline passport) and post the report to the job summary.
+branding:
+  icon: check-square
+  color: green
+inputs:
+  data:
+    description: Path, glob or directory of the data to check.
+    required: true
+  contract:
+    description: Contract file (YAML, JSON or TOML).
+    required: true
+  baseline:
+    description: Passport JSON of the previous version (optional).
+    required: false
+    default: ""
+  strict:
+    description: Fail on warnings too.
+    required: false
+    default: "false"
+  passport-out:
+    description: Where to write the new passport (optional).
+    required: false
+    default: ""
+  version:
+    description: DataPassport version to install (default = this action's ref).
+    required: false
+    default: ""
+  python-version:
+    description: Python version.
+    required: false
+    default: "3.12"
+outputs:
+  fingerprint:
+    description: Content fingerprint of the checked data.
+    value: ${{ steps.check.outputs.fingerprint }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+    - shell: bash
+      env:
+        DP_VERSION: ${{ inputs.version }}
+        ACTION_PATH: ${{ github.action_path }}
+      run: |
+        if [ -n "$DP_VERSION" ]; then pip install "datapassport==$DP_VERSION"; else pip install "$ACTION_PATH"; fi
+    - id: check
+      shell: bash
+      env:
+        DP_DATA: ${{ inputs.data }}
+        DP_CONTRACT: ${{ inputs.contract }}
+        DP_BASELINE: ${{ inputs.baseline }}
+        DP_STRICT: ${{ inputs.strict }}
+        DP_PASSPORT_OUT: ${{ inputs.passport-out }}
+      run: |
+        args=(check "$DP_DATA" --contract "$DP_CONTRACT" --output github --out "$RUNNER_TEMP/dp-report.json")
+        [ -n "$DP_BASELINE" ] && args+=(--baseline "$DP_BASELINE")
+        [ "$DP_STRICT" = "true" ] && args+=(--strict)
+        [ -n "$DP_PASSPORT_OUT" ] && args+=(--passport-out "$DP_PASSPORT_OUT")
+        set +e
+        datapassport "${args[@]}"
+        code=$?
+        set -e
+        if [ -f "$RUNNER_TEMP/dp-report.json" ]; then
+          python -c "import json,os;print('fingerprint='+json.load(open(os.environ['RUNNER_TEMP']+'/dp-report.json'))['fingerprint'])" >> "$GITHUB_OUTPUT"
+        fi
+        exit $code

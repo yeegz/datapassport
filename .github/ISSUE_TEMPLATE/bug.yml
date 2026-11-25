@@ -1,0 +1,17 @@
+name: Bug report
+description: Report a fingerprint, profile, comparison, contract or install problem.
+labels: [bug]
+body:
+  - type: input
+    id: environment
+    attributes:
+      label: DataPassport, Python and operating system versions
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How to reproduce the problem
+      description: Include the command or Python snippet, expected and actual results, and a small synthetic fixture if needed. Remove private paths and values from output.
+    validations:
+      required: true

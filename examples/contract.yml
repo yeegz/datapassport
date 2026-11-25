@@ -1,0 +1,18 @@
+version: 1
+dataset: orders
+key: [order_id]
+rows: {min: 1}
+schema: {extra_columns: warn}
+columns:
+  order_id: {type: integer, nullable: false, unique: true}
+  customer_email: {type: string, sensitive: true, pattern: '[^@\s]+@[^@\s]+'}
+  status: {type: string, allowed: [new, paid, shipped, cancelled]}
+  amount: {type: number, min: 0, max_null_fraction: 0.01}
+  quantity: {type: integer, min: 1, max: 99}
+  created_at: {type: timestamp}
+  country: {type: string, allowed: [MY, SG, AE, SA, DE, GB]}
+checks:
+  - {rule: no_duplicate_rows}
+  - {rule: row_count_change, max_fraction: 0.2, severity: warn}
+drift:
+  default: {metric: psi, warn: 0.1, fail: 0.25}

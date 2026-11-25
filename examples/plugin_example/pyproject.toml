@@ -1,0 +1,13 @@
+[project]
+name = "acme-dp"
+version = "0.1.0"
+description = "Example DataPassport plugin: custom rules and a metric."
+requires-python = ">=3.11"
+dependencies = ["datapassport"]
+
+[project.entry-points."datapassport.plugins"]
+acme = "acme_dp.rules"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
